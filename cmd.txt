@@ -1,0 +1,7 @@
+express myapp --hogan -c stylus less
+
+http://expressjs.com/starter/generator.html
+
+npm install -g nodemon -> autreload when debug, remove stop and start
+
+nodemon bin/www -> make it work
