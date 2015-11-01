@@ -4,4 +4,6 @@ http://expressjs.com/starter/generator.html
 
 npm install -g nodemon -> autreload when debug, remove stop and start
 
-nodemon bin/www -> make it work
+nodemon bin/www -> make it work hhttps://github.com/remy/nodemon/issues/330 -> @openwork 3 step
+
+npm will install in the cmd current directory

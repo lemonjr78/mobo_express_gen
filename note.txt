@@ -1,0 +1,20 @@
+
+
+read nodejs basic koding.com
+
+expressjs + mysql (view insert )(lcoal || koding(setup sublime) )
+
+2 video express + myssql mvc
+https://www.youtube.com/watch?v=yXgs-cwa0EA
+https://www.youtube.com/watch?v=QseHOX-5nJQ
+https://www.youtube.com/watch?v=17-VJ8K4qRA
+
+upload express to koding.com
+
+test it
+
+
+
+expressjs + mongo(koding)
+
+why nodejs, how does it work

@@ -8,7 +8,14 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+//var db_mysql = require('./my_module/connect_mysql.js');
+
 var app = express();
+
+//db_mysql.connect();
+//db_mysql.viewdata();
+//db_mysql.conclose();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
