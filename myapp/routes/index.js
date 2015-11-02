@@ -18,4 +18,16 @@ var router = express.Router();
 router.get('/:title/:name', function(req,res){
 	res.render('index' , req.params);
 });
+
+router.get('/customerList', function(req,res){
+	var customerDao = require ('../Dao/customerDao.js');
+	customerDao.customerDao.getAllCustomers(function (data){
+		console.log(data);
+		res.render('customer' , {
+			customer : data
+		});
+	});
+	
+});
+
 module.exports = router;
