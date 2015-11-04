@@ -1,9 +1,11 @@
 
-var connectionProvider = require('./mySqlConnectionProvider.js');
-var customerDao = {
+var mySqlConnectionProvider = require('./mySqlConnectionProvider.js');
+
+
+module.exports = {
 
 	getAllCustomers : function( callback ){
-		var connection = connectionProvider.mysqlConnectionProvider.getSqlConnection();
+		var connection = mySqlConnectionProvider.getSqlConnection();
 
 		var customers = [];
 		var sqlStatement = "SELECT * FROM Customer";
@@ -16,8 +18,6 @@ var customerDao = {
 				callback(customers);
 			});
 		}
-		connectionProvider.mysqlConnectionProvider.closeSqlConnection(connection) ;
+		mySqlConnectionProvider.closeSqlConnection(connection) ;
 	}
 };
-
-module.exports.customerDao = customerDao;

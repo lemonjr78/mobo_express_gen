@@ -1,10 +1,10 @@
 var mysql = require('mysql');
-var mysqlConnectionString = require('./mySqlConnectionString.js');
+var mySqlConnectionString = require('./mySqlConnectionString.js');
 
-var mysqlConnectionProvider = {
+module.exports = {
 
 	getSqlConnection : function () {
-		var connection = mysql.createConnection( mysqlConnectionString.mySqlConnectionString.connectionString.development );
+		var connection = mysql.createConnection( mySqlConnectionString.development );
 		connection.connect(function error(){
 			//if(error)throw error;
 			console.log('mysql connection success');
@@ -20,6 +20,4 @@ var mysqlConnectionProvider = {
 		});
 	}
 
-}
-
-exports.mysqlConnectionProvider = mysqlConnectionProvider;
+};

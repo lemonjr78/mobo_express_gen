@@ -21,7 +21,7 @@ router.get('/:title/:name', function(req,res){
 
 router.get('/customerList', function(req,res){
 	var customerDao = require ('../Dao/customerDao.js');
-	customerDao.customerDao.getAllCustomers(function (data){
+	customerDao.getAllCustomers(function (data){
 		console.log(data);
 		res.render('customer' , {
 			customer : data
