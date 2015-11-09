@@ -33,6 +33,12 @@ router.route('/customer/:customer_id')
 		customerDao.deleteCustomer(req.params.customer_id);
 		res.send( { message : 'success delete' });
 	})
+	.put(function(req,res){
+		var customerDao = require ('../Dao/customerDao.js');
+		
+		customerDao.updateCustomer(req.body);
+		res.send( { message : 'success update' });
+	})
 
 ;
 

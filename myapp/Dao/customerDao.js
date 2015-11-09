@@ -46,6 +46,19 @@ module.exports = {
 			});
 		}
 		mySqlConnectionProvider.closeSqlConnection(connection) ;
+	},
+
+	updateCustomer : function( customerdata ){
+		var connection = mySqlConnectionProvider.getSqlConnection();
+
+		var customers = [];
+		var sqlStatement = "UPDATE Customer SET Name = '"+customerdata.nama+"', Place = '"+customerdata.place+"' WHERE Id = '"+customerdata.id+"'";
+		if(connection){
+			connection.query (sqlStatement , function(err, rows, fields){
+				if (err) throw err;
+			});
+		}
+		mySqlConnectionProvider.closeSqlConnection(connection) ;
 	}
 
 };

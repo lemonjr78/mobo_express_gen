@@ -7,52 +7,95 @@
 
 <ul>
   <li ng-repeat="x in names">
-    {{ x.Name + ', ' + x.Place }} <a ng-click="deleteCustomer(x.Id)">Delete</a>  
+    {{ x.Name + ', ' + x.Place }} 
+    <a ng-click="deleteCustomer(x.Id)">Delete</a>
+    <a ng-click="showUpdate(x)">Update</a>  
   </li>
 </ul>
+
+<form ng-submit="updateCustomer()" ng-show="isShow">
+	<input type="hidden" ng-model="formData.id"/>
+	Nama <input name="nama" ng-model="formData.nama"/>
+	Place <input name="place"ng-model="formData.place"/>
+	<input type="submit"/>
+	{{message}}
+</form>
 
 </div>
 
 <script>
 var app = angular.module('myApp', []);
-app.controller('CustomersController', function($scope, $http) {
+app.controller('CustomersController', function($scope,$interval, $http) {
 
+	$scope.formData = {};
 
-$scope.getAllCustomers = function(){
-	$http.get('/api/customer')
-	.then(function successCallback(response) {
-		$scope.names = response.data;
-	},
-	function errorCallback(response) {
-		alert('faail ' + response);
-	});
-}
+	$scope.getAllCustomers = function(){
+		$http.get('/api/customer')
+		.then(function successCallback(response) {
+			$scope.names = response.data;
+		},
+		function errorCallback(response) {
+			alert('faail ' + response);
+		});
+	}
  
- $scope.getAllCustomers();
+ 	 
 
- $scope.deleteCustomer = function(id){
-	  $http({
-	  method  : 'DELETE',
-	  url     : '../api/customer/'+id,
-	    
-	  headers : { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
-	 })
-	  .success(function(data) {
-	    console.log(data);
+	$scope.deleteCustomer = function(id){
+		  $http({
+		  method  : 'DELETE',
+		  url     : '../api/customer/'+id,
+		    
+		  headers : { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
+		 })
+		  .success(function(data) {
+		    console.log(data);
 
-	    if (!data.success) {
-	      // if not successful, bind errors to error variables
-	      $scope.message = data.message;
-	      $scope.message = data.message;
-	    } else {
-	      // if successful, bind success message to message
-	      $scope.message = data.message;
-	    }
-	  });
+		    if (!data.success) {
+		      // if not successful, bind errors to error variables
+		      $scope.message = data.message;
+		      $scope.message = data.message;
+		    } else {
+		      // if successful, bind success message to message
+		      $scope.message = data.message;
+		    }
+		  });
 
-	  $scope.getAllCustomers();
- }
+	}
 
+	$scope.showUpdate = function(customer){
+		//alert($scope.formData.nama);
+		$scope.formData.nama = customer.Name;
+		$scope.formData.place = customer.Place;
+		$scope.formData.id = customer.Id;
+		$scope.isShow = true;
+	}
+
+	$scope.updateCustomer = function(){
+		$http({
+		  method  : 'PUT',
+		  url     : '../api/customer/'+$scope.formData.id,
+		  data    : JSON.stringify($scope.formData),  // pass in data as strings
+		  headers : { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
+		 })
+		  .success(function(data) {
+		    console.log(data);
+
+		    if (!data.success) {
+		      // if not successful, bind errors to error variables
+		      $scope.message = data.message;
+		      $scope.message = data.message;
+		    } else {
+		      // if successful, bind success message to message
+		      $scope.message = data.message;
+		    }
+		});
+	};
+	$scope.intervalPromise = $interval(function(){
+          $scope.getAllCustomers();
+    }, 5000); 
+
+	$scope.getAllCustomers();
 
 });
 </script>
