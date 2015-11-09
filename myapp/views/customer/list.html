@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="CustomersController"> 
+
+<ul>
+  <li ng-repeat="x in names">
+    {{ x.Name + ', ' + x.Place }} <a ng-click="deleteCustomer(x.Id)">Delete</a>  
+  </li>
+</ul>
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('CustomersController', function($scope, $http) {
+
+
+$scope.getAllCustomers = function(){
+	$http.get('/api/customer')
+	.then(function successCallback(response) {
+		$scope.names = response.data;
+	},
+	function errorCallback(response) {
+		alert('faail ' + response);
+	});
+}
+ 
+ $scope.getAllCustomers();
+
+ $scope.deleteCustomer = function(id){
+	  $http({
+	  method  : 'DELETE',
+	  url     : '../api/customer/'+id,
+	    
+	  headers : { 'Content-Type': 'application/json' }  // set the headers so angular passing info as form data (not request payload)
+	 })
+	  .success(function(data) {
+	    console.log(data);
+
+	    if (!data.success) {
+	      // if not successful, bind errors to error variables
+	      $scope.message = data.message;
+	      $scope.message = data.message;
+	    } else {
+	      // if successful, bind success message to message
+	      $scope.message = data.message;
+	    }
+	  });
+
+	  $scope.getAllCustomers();
+ }
+
+
+});
+</script>
+
+</body>
+</html>

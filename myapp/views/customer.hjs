@@ -1,8 +1,0 @@
- {{#customer}}
- 	{{ Id }}
-    {{ Name }} 
-    {{ Place }}
-    <br>
-{{/customer}}
-
- 
