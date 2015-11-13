@@ -35,5 +35,17 @@ router.get('/add', function(req,res){
 	res.render('customer/add' , req.params);
 });
 
+/*try mongodb*/
+
+
+router.get('/listmdb', function(req,res){
+	var ItemTemplate =  require('../app/models/temTemplate');
+	ItemTemplate.find({} , function(err,records){
+		if(err) return res.status(422).send('Problem loadiing records', err.message);
+		res.send(records);
+	})
+	//res.render('customer/add' , req.params);
+});
+
 
 module.exports = router;
