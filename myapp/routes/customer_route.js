@@ -23,6 +23,9 @@ router.post('/create', function(req,res){
 */
 
 /*use ng-here*/
+router.get('/', function(req,res){
+	res.render('customer/index' , req.params);
+});
 
 router.get('/list', function(req,res){
 	res.render('customer/list' , req.params);
