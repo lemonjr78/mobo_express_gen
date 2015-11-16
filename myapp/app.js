@@ -14,6 +14,8 @@ var api = require('./routes/api');
 
 var app = express();
 
+
+
 //db_mysql.connect();
 //db_mysql.viewdata();
 //db_mysql.conclose();
@@ -58,7 +60,11 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+  
 }
+
+
+
 
 // production error handler
 // no stacktraces leaked to user

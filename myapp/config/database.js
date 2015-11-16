@@ -13,7 +13,7 @@ function connect(connectionString){
 
 module.exports = connect
 
-connect('mongodb://localhost/nodeslash_development');
+connect('mongodb://localhost/test');
 
 /*
 
